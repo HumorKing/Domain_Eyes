@@ -1,0 +1,5 @@
+rich
+argparse
+lxml
+selenium
+pillow
