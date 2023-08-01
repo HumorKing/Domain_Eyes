@@ -56,7 +56,7 @@ class Run():
                         i=str(i).replace(',','，').replace('[','').replace(']','').replace("\'",'')
                         W.write(str(i)+',')
                     W.write('\n') 
-            tools.quchong(f'./result/{self.name}.csv')
+            #tools.quchong(f'./result/{self.name}.csv')
 if not (config.aqc_token+config.tianyan_token):
      console.print("请修改config.py配置文件！",style="red")
      exit()
