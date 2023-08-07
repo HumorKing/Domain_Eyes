@@ -28,12 +28,12 @@ class Run():
          self.percent=int(percunt)
          self.deep=int(deep)
          self.all_company=[]
-    def deep_company(self,ty_id,deep):   #n为递归深度,也就是用来控制缩进的数量
+    def deep_company(self,ty_id,deep):  
         deep-=1
-        company,ids = tianyan.get_all_company(ty_id,self.percent)   #按照给出的文件路径打开文件, 返回的it是一个可迭代对象
+        company,ids = tianyan.get_all_company(ty_id,self.percent)   
         self.all_company+=company
-        if ids:   #判断某一路径内的内容是否是文件夹固定写法
-            for el in ids:   #对给出的文件路径中的文件进行迭代,打印出给出文件路径内的文件名
+        if ids:   
+            for el in ids:   
                 if deep<=0:
                      break
                 self.deep_company(el,deep+1)    #重新调用次函数,不过参数为新的路径名
@@ -64,6 +64,13 @@ parser = argparse.ArgumentParser(description='企业资产收集')
 parser.add_argument('--name', '-n', help='企业名称', required=True)
 parser.add_argument('--deep', '-d', help='企业递归层数(默认两层)',default=2)
 parser.add_argument('--percent', '-p', help='占股百分比(默认50)',default=50)
+parser.add_argument('--file','-f',help='批量地址')
 args = parser.parse_args()
-task=Run(args.name,args.percent,args.deep)
+if not args.file:
+    task=Run(args.name,args.percent,args.deep)
+else:
+     with open(args.file,'r',encoding='utf-8') as F:
+          for target in F.readlines():
+               target=target.strip()
+               task=Run(target,args.percent,args.deep)
 task.run()
