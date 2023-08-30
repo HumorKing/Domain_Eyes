@@ -61,7 +61,7 @@ if not (config.aqc_token+config.tianyan_token):
      console.print("请修改config.py配置文件！",style="red")
      exit()
 parser = argparse.ArgumentParser(description='企业资产收集')
-parser.add_argument('--name', '-n', help='企业名称', required=True)
+parser.add_argument('--name', '-n', help='企业名称')
 parser.add_argument('--deep', '-d', help='企业递归层数(默认两层)',default=2)
 parser.add_argument('--percent', '-p', help='占股百分比(默认50)',default=50)
 parser.add_argument('--file','-f',help='批量地址')
